@@ -1,25 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Grommet, Select } from 'grommet';
 
 const App: React.FC = () => {
+  const OPTIONS = [{ name: "Bob", age: 22 }, { name: "Garol", age: 59 }];
+  const [selected, setSelected] = React.useState<{
+    name: string;
+    age: number;
+  }>();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grommet>
+      <Select
+        options={OPTIONS}
+        value={selected}
+        valueKey={(opt) => opt.name}
+        labelKey={(opt) => `${opt.name} (${opt.age})`}
+        onChange={({ option }) => setSelected(option)}
+      />
+    </Grommet>
   );
 }
 
